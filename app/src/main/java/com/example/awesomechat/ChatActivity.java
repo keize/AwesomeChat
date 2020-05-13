@@ -80,6 +80,7 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+
         auth = FirebaseAuth.getInstance();
 
         Intent intent = getIntent();
@@ -114,7 +115,7 @@ public class ChatActivity extends AppCompatActivity {
 
         Date time = new Date();
         DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
-        final String dateText = dateFormat.format(time);
+        String dateText = dateFormat.format(time);
         dataTextView.setText(dateText);
 
 
@@ -163,7 +164,7 @@ public class ChatActivity extends AppCompatActivity {
                 message.setSender(auth.getCurrentUser().getUid());
                 message.setRecepient(recepientUserId);
                 message.setName(userName);
-                message.setData(dateText);
+               // message.setData(dateText);
                 message.setImageUrl(null);
                 messagesDatabaseReference.push().setValue(message);
 
