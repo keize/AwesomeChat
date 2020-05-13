@@ -10,20 +10,18 @@ public class AwesomeMessage {
     private String sender;
     private String recepient;
     private boolean isMine;
-    private String data;
 
 
     public AwesomeMessage() {
     }
 
-    public AwesomeMessage(String text, String name, String imageUrl, String sender, String recepient, boolean isMine, String data) {
+    public AwesomeMessage(String text, String name, String imageUrl, String sender, String recepient, boolean isMine) {
         this.text = text;
         this.name = name;
         this.imageUrl = imageUrl;
         this.sender = sender;
         this.recepient = recepient;
         this.isMine = isMine;
-        this.data = data;
     }
 
     public boolean isMine() {
@@ -74,11 +72,5 @@ public class AwesomeMessage {
         this.imageUrl = imageUrl;
     }
 
-    public String getData() {
-        return data;
-    }
 
-    public void setData(String data) {
-        this.data = data;
-    }
 }

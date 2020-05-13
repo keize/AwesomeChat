@@ -68,6 +68,9 @@ public class ChatActivity extends AppCompatActivity {
     private DatabaseReference usersDatabaseReference;
     private ChildEventListener usersChildEventListener;
 
+    private DatabaseReference dateDatabaseReference;
+    private ChildEventListener dateChildEventListener;
+
     private FirebaseStorage storage;
     private StorageReference chatImageStorageReferences;
 
@@ -93,14 +96,10 @@ public class ChatActivity extends AppCompatActivity {
         setTitle(recepientUserName);
 
 
-
-
-
-
-
         database = FirebaseDatabase.getInstance();
         messagesDatabaseReference = database.getReference().child("messages");
         usersDatabaseReference = database.getReference().child("users");
+        dateDatabaseReference = database.getReference().child("date");
 
         storage = FirebaseStorage.getInstance();
         chatImageStorageReferences = storage.getReference().child("chatImages");
@@ -111,12 +110,6 @@ public class ChatActivity extends AppCompatActivity {
         sendMessageButton = findViewById(R.id.sendMassageButton);
         messageEditText = findViewById(R.id.editMassageText);
         dataTextView = findViewById(R.id.dataTextView);
-
-
-        Date time = new Date();
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
-        String dateText = dateFormat.format(time);
-        dataTextView.setText(dateText);
 
 
         messageListView = findViewById(R.id.messageListView);
@@ -164,7 +157,7 @@ public class ChatActivity extends AppCompatActivity {
                 message.setSender(auth.getCurrentUser().getUid());
                 message.setRecepient(recepientUserId);
                 message.setName(userName);
-               // message.setData(dateText);
+
                 message.setImageUrl(null);
                 messagesDatabaseReference.push().setValue(message);
 
@@ -189,7 +182,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 User user = dataSnapshot.getValue(User.class);
 
-                if(user.getId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                if (user.getId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                     userName = user.getName();
                 }
 
@@ -216,8 +209,53 @@ public class ChatActivity extends AppCompatActivity {
             }
 
         };
+
         usersDatabaseReference.addChildEventListener(usersChildEventListener);
 
+
+
+//        dateChildEventListener = new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//
+//                MessegeDate messegeDate = dataSnapshot.getValue(MessegeDate.class);
+//
+//                if(messegeDate.equals(FirebaseAuth.getInstance().getUid())){
+//                    messegeDate.getDate();
+//                } adapter.add(messegeDate);
+//
+//                Date time = new Date();
+//                DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+//                String dateText = dateFormat.format(time);
+//                dataTextView.setText(dateText);
+//
+//
+//
+//            }
+//
+//            @Override
+//            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//
+//
+//
+//        };
 
 
         messagesChildEventListener = new ChildEventListener() {
@@ -322,7 +360,7 @@ public class ChatActivity extends AppCompatActivity {
                         message.setName(userName);
                         message.setSender(auth.getCurrentUser().getUid());
                         message.setRecepient(recepientUserId);
-                       // message.setData(dataTextView.toString());
+                        message.setText(dataTextView.toString());
                         messagesDatabaseReference.push().setValue(message);
                     } else {
                         // Handle failures
