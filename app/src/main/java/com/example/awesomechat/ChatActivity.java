@@ -6,14 +6,12 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -38,7 +36,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -68,14 +65,13 @@ public class ChatActivity extends AppCompatActivity {
     private DatabaseReference usersDatabaseReference;
     private ChildEventListener usersChildEventListener;
 
-    private DatabaseReference dateDatabaseReference;
-    private ChildEventListener dateChildEventListener;
-
     private FirebaseStorage storage;
     private StorageReference chatImageStorageReferences;
 
 
 
+    String datePattern = "MMMM d, hh:mm:ss";
+    final SimpleDateFormat dateFormat = new SimpleDateFormat(datePattern, Locale.getDefault());
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -95,11 +91,9 @@ public class ChatActivity extends AppCompatActivity {
 
         setTitle(recepientUserName);
 
-
         database = FirebaseDatabase.getInstance();
         messagesDatabaseReference = database.getReference().child("messages");
         usersDatabaseReference = database.getReference().child("users");
-        dateDatabaseReference = database.getReference().child("date");
 
         storage = FirebaseStorage.getInstance();
         chatImageStorageReferences = storage.getReference().child("chatImages");
@@ -157,7 +151,7 @@ public class ChatActivity extends AppCompatActivity {
                 message.setSender(auth.getCurrentUser().getUid());
                 message.setRecepient(recepientUserId);
                 message.setName(userName);
-
+                message.setMessageDate(dateFormat.format(new Date()));
                 message.setImageUrl(null);
                 messagesDatabaseReference.push().setValue(message);
 
@@ -211,52 +205,6 @@ public class ChatActivity extends AppCompatActivity {
         };
 
         usersDatabaseReference.addChildEventListener(usersChildEventListener);
-
-
-
-//        dateChildEventListener = new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//                MessegeDate messegeDate = dataSnapshot.getValue(MessegeDate.class);
-//
-//                if(messegeDate.equals(FirebaseAuth.getInstance().getUid())){
-//                    messegeDate.getDate();
-//                } adapter.add(messegeDate);
-//
-//                Date time = new Date();
-//                DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
-//                String dateText = dateFormat.format(time);
-//                dataTextView.setText(dateText);
-//
-//
-//
-//            }
-//
-//            @Override
-//            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//            }
-//
-//            @Override
-//            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//
-//
-//
-//        };
-
 
         messagesChildEventListener = new ChildEventListener() {
             @Override
@@ -322,8 +270,6 @@ public class ChatActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
 
-
-
         }
     }
 
@@ -346,8 +292,6 @@ public class ChatActivity extends AppCompatActivity {
                     if (!task.isSuccessful()) {
                         throw task.getException();
                     }
-
-                    // Continue with the task to get the download URL
                     return imageReference.getDownloadUrl();
                 }
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -360,14 +304,22 @@ public class ChatActivity extends AppCompatActivity {
                         message.setName(userName);
                         message.setSender(auth.getCurrentUser().getUid());
                         message.setRecepient(recepientUserId);
-                        message.setText(dataTextView.toString());
                         messagesDatabaseReference.push().setValue(message);
                     } else {
-                        // Handle failures
-                        // ...
+
                     }
                 }
             });
         }
     }
+
+//    private void setMessage() {
+//        AwesomeMessage message = new AwesomeMessage();
+//        message.setSender(auth.getCurrentUser().getUid());
+//        message.setRecepient(recepientUserId);
+//        message.setName(userName);
+//        message.setMessageDate(dateFormat.format(new Date()));
+
+
+
 }

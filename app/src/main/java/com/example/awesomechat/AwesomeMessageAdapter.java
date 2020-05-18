@@ -11,18 +11,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
+
 
 public class AwesomeMessageAdapter extends ArrayAdapter<AwesomeMessage> {
 
     private List<AwesomeMessage> messages;
     private Activity activity;
-    private TextView dataTextView;
 
     public AwesomeMessageAdapter(Activity context, int resource,
                                  List<AwesomeMessage> messages) {
@@ -31,8 +26,6 @@ public class AwesomeMessageAdapter extends ArrayAdapter<AwesomeMessage> {
         this.messages = messages;
         this.activity = context;
     }
-
-
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -67,12 +60,12 @@ public class AwesomeMessageAdapter extends ArrayAdapter<AwesomeMessage> {
         if (isText) {
             viewHolder.messegeTextView.setVisibility(View.VISIBLE);
             viewHolder.photoImageView.setVisibility(View.GONE);
-            viewHolder.dataTextView.setVisibility(View.VISIBLE);
             viewHolder.messegeTextView.setText(awesomeMessage.getText());
+            viewHolder.dataTextView.setText(awesomeMessage.getMessageDate());
         } else {
             viewHolder.photoImageView.setVisibility(View.VISIBLE);
             viewHolder.messegeTextView.setVisibility(View.GONE);
-            viewHolder.dataTextView.setVisibility(View.VISIBLE);
+            viewHolder.messegeTextView.setText(awesomeMessage.getText());
             Glide.with(viewHolder.photoImageView.getContext())
                     .load(awesomeMessage.getImageUrl())
                     .into(viewHolder.photoImageView);
@@ -110,12 +103,6 @@ public class AwesomeMessageAdapter extends ArrayAdapter<AwesomeMessage> {
             photoImageView = view.findViewById(R.id.photoImageView);
             messegeTextView = view.findViewById(R.id.messegeTextView);
             dataTextView = view.findViewById(R.id.dataTextView);
-
-            Date time = new Date();
-            DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
-            String dateText = dateFormat.format(time);
-            dataTextView.setText(dateText);
-
 
         }
 

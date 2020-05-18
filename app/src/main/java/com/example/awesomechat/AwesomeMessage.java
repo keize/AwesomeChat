@@ -10,6 +10,7 @@ public class AwesomeMessage {
     private String sender;
     private String recepient;
     private boolean isMine;
+    private String messageDate;
 
 
     public AwesomeMessage() {
@@ -72,5 +73,11 @@ public class AwesomeMessage {
         this.imageUrl = imageUrl;
     }
 
+    public String getMessageDate() {
+        return messageDate;
+    }
 
+    public void setMessageDate(String messageDate) {
+        this.messageDate = messageDate;
+    }
 }
