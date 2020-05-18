@@ -265,6 +265,7 @@ public class ChatActivity extends AppCompatActivity {
             case R.id.sign_out:
                 FirebaseAuth.getInstance().signOut();
                 startActivity( new Intent(ChatActivity.this, SignInActivity.class));
+                finishAffinity();
                 return true;
 
             default:
@@ -302,6 +303,7 @@ public class ChatActivity extends AppCompatActivity {
                         AwesomeMessage message = new AwesomeMessage();
                         message.setImageUrl(downloadUri.toString());
                         message.setName(userName);
+                        message.setMessageDate(dateFormat.format(new Date()));
                         message.setSender(auth.getCurrentUser().getUid());
                         message.setRecepient(recepientUserId);
                         messagesDatabaseReference.push().setValue(message);

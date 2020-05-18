@@ -7,7 +7,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SignInActivity">
-    
+
+
+
     
     <ImageView
         android:layout_width="300dp"
@@ -16,37 +18,52 @@
         android:layout_marginTop="20dp"
         android:src="@drawable/lo"/>
 
-    <EditText
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/emailEditText"
-        android:hint="Your Email"
-        android:inputType="textEmailAddress"
-        android:layout_marginTop="10dp"/>
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/passwordEditText"
-        android:hint="Your Password"
-        android:inputType="textPassword"
-        android:layout_marginTop="10dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/repeatPasswordEditText"
-        android:hint="Confirm Password"
-        android:inputType="textPassword"
-        android:layout_marginTop="10dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/emailEditText"
+                android:hint="Your Email"
+                android:inputType="textEmailAddress"
+                android:layout_marginTop="10dp"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/nameEditText"
-        android:hint="Your Name"
-        android:inputType="textPersonName"
-        android:layout_marginTop="10dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/passwordEditText"
+                android:hint="Your Password"
+                android:inputType="textPassword"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/repeatPasswordEditText"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/nameEditText"
+                android:hint="Your Name"
+                android:inputType="textPersonName"
+                android:layout_marginTop="10dp"/>
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
 
     <Button
         android:layout_width="wrap_content"
@@ -66,6 +83,8 @@
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+
 
 
 </LinearLayout>

@@ -148,6 +148,7 @@ public class UserListActivity extends AppCompatActivity {
             case R.id.sign_out:
                 FirebaseAuth.getInstance().signOut();
                 startActivity( new Intent(UserListActivity.this, SignInActivity.class));
+                finishAffinity();
                 return true;
 
             default:

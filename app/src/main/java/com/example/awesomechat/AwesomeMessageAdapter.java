@@ -66,6 +66,7 @@ public class AwesomeMessageAdapter extends ArrayAdapter<AwesomeMessage> {
             viewHolder.photoImageView.setVisibility(View.VISIBLE);
             viewHolder.messegeTextView.setVisibility(View.GONE);
             viewHolder.messegeTextView.setText(awesomeMessage.getText());
+            viewHolder.dataTextView.setText(awesomeMessage.getMessageDate());
             Glide.with(viewHolder.photoImageView.getContext())
                     .load(awesomeMessage.getImageUrl())
                     .into(viewHolder.photoImageView);

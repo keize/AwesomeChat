@@ -5,23 +5,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
     android:orientation="vertical"
     tools:context=".ChatActivity">
 
-<ListView
+
+
+    <ScrollView
+        android:id="@+id/hscroll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+    </ScrollView>
+
+    <ListView
     android:id="@+id/messageListView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:transcriptMode="alwaysScroll"
     android:layout_above="@id/sendMassageLayout"
     tools:listitem="@layout/message_item"
     android:divider="@android:color/transparent"/>
+
+
 
     <LinearLayout
         android:id="@+id/sendMassageLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="4dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 
@@ -53,6 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </ProgressBar>
+
 
 
 </RelativeLayout>
