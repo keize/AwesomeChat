@@ -90,6 +90,7 @@ public class ChatActivity extends AppCompatActivity {
         }
 
         setTitle(recepientUserName);
+        setTitle(recepientUserName);
 
         database = FirebaseDatabase.getInstance();
         messagesDatabaseReference = database.getReference().child("messages");
@@ -212,18 +213,21 @@ public class ChatActivity extends AppCompatActivity {
                 AwesomeMessage message =
                         dataSnapshot.getValue(AwesomeMessage.class);
 
-                if (message.getSender().equals(auth.getCurrentUser().getUid()) &&
+                if (message == null) {
+                    return;
+                }
+
+                if (message.getSender() != null && message.getSender().equals(auth.getCurrentUser().getUid()) &&
                         message.getRecepient().equals(recepientUserId)) {
                     message.setMine(true);
                     adapter.add(message);
 
-            } else if (message.getRecepient().equals(auth.getCurrentUser().getUid()) &&
-                    message.getSender().equals(recepientUserId)) {
+                } else if (message.getRecepient() != null && message.getRecepient().equals(auth.getCurrentUser().getUid()) &&
+                        message.getSender().equals(recepientUserId)) {
                     message.setMine(false);
                     adapter.add(message);
 
-            }
-
+                }
             }
 
             @Override
@@ -280,7 +284,7 @@ public class ChatActivity extends AppCompatActivity {
 
         if (requestCode == RC_IMAGE_PICKER && resultCode == RESULT_OK) {
             Uri selectImageUrl = data.getData();
-         final StorageReference imageReference = chatImageStorageReferences
+            final StorageReference imageReference = chatImageStorageReferences
                     .child(selectImageUrl.getLastPathSegment());
 
             UploadTask uploadTask = imageReference.putFile(selectImageUrl);
@@ -314,14 +318,6 @@ public class ChatActivity extends AppCompatActivity {
             });
         }
     }
-
-//    private void setMessage() {
-//        AwesomeMessage message = new AwesomeMessage();
-//        message.setSender(auth.getCurrentUser().getUid());
-//        message.setRecepient(recepientUserId);
-//        message.setName(userName);
-//        message.setMessageDate(dateFormat.format(new Date()));
-
 
 
 }

@@ -8,6 +8,14 @@
     android:orientation="vertical"
     tools:context=".ChatActivity">
 
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        android:titleTextColor="@color/lightgrey"
+        android:layout_height="wrap_content">
+
+    </Toolbar>
 
 
     <ScrollView
@@ -15,18 +23,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-
     </ScrollView>
 
     <ListView
-    android:id="@+id/messageListView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_above="@id/sendMassageLayout"
-    tools:listitem="@layout/message_item"
-    android:divider="@android:color/transparent"/>
-
-
+        android:id="@+id/messageListView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:layout_above="@id/sendMassageLayout"
+        tools:listitem="@layout/message_item"
+        android:divider="@android:color/transparent"/>
 
     <LinearLayout
         android:id="@+id/sendMassageLayout"
@@ -35,6 +41,9 @@
         android:padding="4dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
+
+
+
 
         <ImageButton
             android:id="@+id/sendPhotoButton"

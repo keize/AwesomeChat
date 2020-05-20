@@ -2,12 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="10dp"
+    android:background="@drawable/gradient"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SignInActivity">
-
 
 
     
@@ -16,7 +15,7 @@
         android:layout_height="150dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:src="@drawable/lo"/>
+        android:src="@drawable/sad_sun"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -25,12 +24,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="16dp"
             android:orientation="vertical">
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/emailEditText"
+                android:textColor="@color/lightgrey"
                 android:hint="Your Email"
                 android:inputType="textEmailAddress"
                 android:layout_marginTop="10dp"/>
@@ -38,6 +39,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/lightgrey"
                 android:id="@+id/passwordEditText"
                 android:hint="Your Password"
                 android:inputType="textPassword"
@@ -48,6 +50,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/repeatPasswordEditText"
                 android:hint="Confirm Password"
+                android:textColor="@color/lightgrey"
                 android:inputType="textPassword"
                 android:layout_marginTop="10dp"/>
 
@@ -56,6 +59,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/nameEditText"
                 android:hint="Your Name"
+                android:textColor="@color/lightgrey"
                 android:inputType="textPersonName"
                 android:layout_marginTop="10dp"/>
 
@@ -66,9 +70,10 @@
     </ScrollView>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="Sign In"
+        android:background="@drawable/rectangle_for_button"
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:id="@+id/loginSignUpButton"/>

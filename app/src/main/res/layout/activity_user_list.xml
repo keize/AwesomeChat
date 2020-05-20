@@ -7,6 +7,15 @@
     android:layout_height="match_parent"
     tools:context=".UserListActivity">
 
+
+    <Toolbar
+        android:layout_width="match_parent"
+        android:title="Chats"
+        android:background="@color/colorPrimary"
+        android:titleTextColor="@color/lightgrey"
+        android:layout_height="wrap_content"/>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/userListRecycierView"
         android:padding="4dp"
