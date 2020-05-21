@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Awesome Chat!</string>
+    <string name="chats">Chats</string>
 
 </resources>

@@ -22,6 +22,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -51,6 +52,8 @@ public class ChatActivity extends AppCompatActivity {
     private Button sendMessageButton;
     private EditText messageEditText;
     private TextView dataTextView;
+    private androidx.appcompat.widget.Toolbar toolbar;
+
 
     private static final int RC_IMAGE_PICKER = 123;
     private String userName;
@@ -79,6 +82,10 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
 
         auth = FirebaseAuth.getInstance();
 
@@ -90,7 +97,7 @@ public class ChatActivity extends AppCompatActivity {
         }
 
         setTitle(recepientUserName);
-        setTitle(recepientUserName);
+
 
         database = FirebaseDatabase.getInstance();
         messagesDatabaseReference = database.getReference().child("messages");
@@ -261,6 +268,8 @@ public class ChatActivity extends AppCompatActivity {
         inflater.inflate(R.menu.main_menu, menu);
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

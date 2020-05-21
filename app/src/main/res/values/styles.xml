@@ -11,7 +11,8 @@
     <style name="Toolbar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
-        <item name="theme">@style/Theme.AppCompat.Light.DarkActionBar</item>
+        <item name="android:textColor">@color/lightgrey</item>
+        <item name="theme">@style/Theme.AppCompat.Light.NoActionBar</item>
         <item name="android:background">@color/colorPrimary</item>
     </style>
 

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -7,20 +9,32 @@
     android:layout_height="match_parent"
     tools:context=".UserListActivity">
 
-
-    <Toolbar
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar123"
+        app:title="@string/chats"
+        app:titleTextColor="@color/lightgrey"
         android:layout_width="match_parent"
-        android:title="Chats"
         android:background="@color/colorPrimary"
-        android:titleTextColor="@color/lightgrey"
-        android:layout_height="wrap_content"/>
+        app:popupTheme="@style/Theme.AppCompat.Light.NoActionBar"
+        app:theme="@style/Theme.AppCompat.NoActionBar"
+        android:layout_height="wrap_content">
+    </androidx.appcompat.widget.Toolbar>
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/toolbar123"
+    tools:context=".UserListActivity">
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/userListRecycierView"
-        android:padding="4dp"
+        android:padding="16dp"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
 </LinearLayout>
+
+</RelativeLayout>

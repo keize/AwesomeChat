@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,7 +26,6 @@ import java.util.ArrayList;
 public class UserListActivity extends AppCompatActivity {
 
 
-
     private FirebaseAuth auth;
     private String userName;
 
@@ -37,11 +37,18 @@ public class UserListActivity extends AppCompatActivity {
    private RecyclerView usersRecyclerView;
    private UserAdapter userAdapter;
    private RecyclerView.LayoutManager userLayoutManager;
+   private androidx.appcompat.widget.Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
+
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar123);
+        setSupportActionBar(toolbar);
+
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -56,6 +63,29 @@ public class UserListActivity extends AppCompatActivity {
         attachUserDataBaseReferenceListener();
         buildRecyclerView();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.sign_out:
+                FirebaseAuth.getInstance().signOut();
+                startActivity( new Intent(UserListActivity.this, SignInActivity.class));
+                finishAffinity();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 
     private void attachUserDataBaseReferenceListener() {
@@ -132,30 +162,4 @@ public class UserListActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.sign_out:
-                FirebaseAuth.getInstance().signOut();
-                startActivity( new Intent(UserListActivity.this, SignInActivity.class));
-                finishAffinity();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-
-
-
-        }
-    }
 }
