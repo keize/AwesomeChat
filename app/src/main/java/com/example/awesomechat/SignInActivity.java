@@ -60,7 +60,6 @@ public class SignInActivity extends AppCompatActivity {
 
         }
 
-
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,47 +70,12 @@ public class SignInActivity extends AppCompatActivity {
 
 
         });
-
-
     }
 
     private void loginSignUpUser(String email, String password) {
 
 
         if (loginModeActive) {
-            if (passwordEditText.getText().toString().trim().length() < 7) {
-                Toast.makeText(this, "Password must be leaast 7 charecters", Toast.LENGTH_LONG).show();
-            } else if (emailEditText.getText().toString().trim().equals("")) {
-                Toast.makeText(this, "Please, input email", Toast.LENGTH_LONG).show();
-            } else {
-                auth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Log.d(TAG, "signInWithEmail:success");
-                                    FirebaseUser user = auth.getCurrentUser();
-                                    Intent intent = new Intent(SignInActivity.this, UserListActivity.class);
-                                    intent.putExtra("userName", nameEditText.getText().toString().trim() );
-                                    startActivity(intent);
-                                    //     updateUI(user);
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                    Toast.makeText(SignInActivity.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                    //   updateUI(null);
-                                    // ...
-                                }
-
-                                // ...
-                            }
-                        });
-            }
-
-        } else {
-
             if (!passwordEditText.getText().toString().trim().equals(
                     confirmPasswordEditText.getText().toString().trim()
             )) {
@@ -147,6 +111,35 @@ public class SignInActivity extends AppCompatActivity {
 
                         });
             }
+
+        } else {
+            if (passwordEditText.getText().toString().trim().length() < 7) {
+                Toast.makeText(this, "Password must be leaast 7 charecters", Toast.LENGTH_LONG).show();
+            } else if (emailEditText.getText().toString().trim().equals("")) {
+                Toast.makeText(this, "Please, input email", Toast.LENGTH_LONG).show();
+            } else {
+                auth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "signInWithEmail:success");
+                                    FirebaseUser user = auth.getCurrentUser();
+                                    Intent intent = new Intent(SignInActivity.this, UserListActivity.class);
+                                    intent.putExtra("userName", nameEditText.getText().toString().trim() );
+                                    startActivity(intent);
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                    Toast.makeText(SignInActivity.this, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+            }
+
+
         }
     }
 
@@ -164,19 +157,20 @@ public class SignInActivity extends AppCompatActivity {
 
     public void toggleLoginMode (View view){
 
-            if (loginModeActive) {
-                loginModeActive = false;
-                buttonSignUp.setText("Sign up");
-                confirmPasswordEditText.setVisibility(View.VISIBLE);
-                nameEditText.setVisibility(View.VISIBLE);
-                textLoginSignUpTextView.setText("Or, log in");
-            } else {
-                loginModeActive = true;
-                buttonSignUp.setText("Log in");
-                textLoginSignUpTextView.setText("Or, sign up");
-                nameEditText.setVisibility(View.GONE);
-                confirmPasswordEditText.setVisibility(View.GONE);
-            }
+        if (loginModeActive) {
+            loginModeActive = false;
+            buttonSignUp.setText("Log in");
+            confirmPasswordEditText.setVisibility(View.GONE);
+            nameEditText.setVisibility(View.GONE);
+            textLoginSignUpTextView.setText("Or, sign up");
+        } else {
+            loginModeActive = true;
+            buttonSignUp.setText("Sign up");
+            textLoginSignUpTextView.setText("Or, Log in");
+            nameEditText.setVisibility(View.VISIBLE);
+            confirmPasswordEditText.setVisibility(View.VISIBLE);
+        }
+
         }
 
     }

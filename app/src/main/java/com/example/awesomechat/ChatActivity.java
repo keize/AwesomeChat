@@ -154,7 +154,7 @@ public class ChatActivity extends AppCompatActivity {
                 message.setRecepient(recepientUserId);
                 message.setName(userName);
                 message.setMessageDate(dateFormat.format(new Date()));
-                //message.setImageUrl(null);
+                message.setImageUrl(null);
                 messagesDatabaseReference.push().setValue(message);
                 messageEditText.setText("");
             }
@@ -209,22 +209,20 @@ public class ChatActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 AwesomeMessage message = dataSnapshot.getValue(AwesomeMessage.class);
 
-                /*if (message == null) {
-                    return;
-                }*/
+//                if (message == null) {
+//                    return;
+//                }
                 if (message.getSender().equals(auth.getCurrentUser().getUid()) &&
                         message.getRecepient().equals(recepientUserId)) {
                     message.setMine(true);
                     messageArrayList.add(message);
                     adapter.notifyDataSetChanged();
-                    //adapter.add(message);
 
                 } else if (message.getRecepient().equals(auth.getCurrentUser().getUid()) &&
                         message.getSender().equals(recepientUserId)) {
                     message.setMine(false);
                     messageArrayList.add(message);
                     adapter.notifyDataSetChanged();
-                   // adapter.add(message);
 
                 }
             }
@@ -259,17 +257,13 @@ public class ChatActivity extends AppCompatActivity {
         messageListRecyclerView = findViewById(R.id.massageListRecycierView);
         messageListRecyclerView.setHasFixedSize(true);
 
-        messageListRecyclerView.addItemDecoration(new DividerItemDecoration
-
-                (messageListRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
-
         messageLayoutManager = new LinearLayoutManager(this);
         adapter = new AwesomeMessageAdapter(messageArrayList);
-        //messageListRecyclerView.setLayoutManager(messageLayoutManager);
         messageListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         messageListRecyclerView.setAdapter(adapter);
 
     }
+
 
 
 
@@ -324,9 +318,9 @@ public class ChatActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
                     if (task.isSuccessful()) {
-                      //  Uri downloadUri = task.getResult();
+                       Uri downloadUri = task.getResult();
                         AwesomeMessage message = new AwesomeMessage();
-                       // message.setImageUrl(downloadUri);
+                        message.setImageUrl(downloadUri.toString());
                         message.setName(userName);
                         message.setMessageDate(dateFormat.format(new Date()));
                         message.setSender(auth.getCurrentUser().getUid());

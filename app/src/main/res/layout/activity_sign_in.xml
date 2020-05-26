@@ -49,6 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/repeatPasswordEditText"
+                android:visibility="gone"
                 android:hint="Confirm Password"
                 android:textColor="@color/lightgrey"
                 android:inputType="textPassword"
@@ -58,6 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/nameEditText"
+                android:visibility="gone"
                 android:hint="Your Name"
                 android:textColor="@color/lightgrey"
                 android:inputType="textPersonName"
@@ -72,7 +74,7 @@
     <Button
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="Sign In"
+        android:text="Log in"
         android:background="@drawable/rectangle_for_button"
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
@@ -80,7 +82,7 @@
 
     <TextView
         android:id="@+id/googleLoginSignUpTextView"
-        android:text="Tap To Log In"
+        android:text="Tap To Sign in"
         android:layout_gravity="center_horizontal"
         android:textSize="16sp"
         android:clickable="true"

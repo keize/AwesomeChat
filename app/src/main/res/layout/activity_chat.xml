@@ -36,8 +36,7 @@
             android:id="@+id/massageListRecycierView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/message_item"
-            android:divider="@android:color/transparent"/>
+            tools:listitem="@layout/message_item" />
 
     </LinearLayout>
 
@@ -50,7 +49,6 @@
         android:padding="4dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
-
 
 
 

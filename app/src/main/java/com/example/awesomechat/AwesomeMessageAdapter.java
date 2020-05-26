@@ -6,16 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 
+
 import java.util.ArrayList;
-
-
-
 
 public class AwesomeMessageAdapter
         extends RecyclerView.Adapter<AwesomeMessageAdapter.AwesomeMessageViewHolder> {
@@ -25,8 +22,10 @@ public class AwesomeMessageAdapter
 
     private ArrayList<AwesomeMessage> awesomeMessages;
 
-    public AwesomeMessageAdapter(ArrayList<AwesomeMessage> messages) {
+
+    public AwesomeMessageAdapter( ArrayList<AwesomeMessage> messages) {
         awesomeMessages = messages;
+
     }
 
     @Override
@@ -83,10 +82,8 @@ public class AwesomeMessageAdapter
         public TextView textTextView;
         public TextView dataTextView;
 
-
         public AwesomeMessageViewHolder(@NonNull View itemView) {
             super(itemView);
-
             photoImageView = itemView.findViewById(R.id.photoImageView);
             textTextView = itemView.findViewById(R.id.messegeTextView);
             dataTextView = itemView.findViewById(R.id.dataTextView);
@@ -94,6 +91,10 @@ public class AwesomeMessageAdapter
         void bind(AwesomeMessage message) {
             textTextView.setText(message.getText());
             dataTextView.setText(message.getMessageDate());
+            Glide
+                    .with(photoImageView)
+                    .load(message.getImageUrl())
+                    .into(photoImageView);
         }
     }
 }
