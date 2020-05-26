@@ -17,7 +17,6 @@
         android:layout_height="wrap_content">
     </androidx.appcompat.widget.Toolbar>
 
-
     <ScrollView
         android:id="@+id/hscroll"
         android:layout_width="wrap_content"
@@ -25,14 +24,24 @@
 
     </ScrollView>
 
-    <ListView
-        android:id="@+id/messageListView"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
         android:layout_above="@id/sendMassageLayout"
-        tools:listitem="@layout/message_item"
-        android:divider="@android:color/transparent"/>
+        android:orientation="vertical">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/massageListRecycierView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/message_item"
+            android:divider="@android:color/transparent"/>
+
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:id="@+id/sendMassageLayout"

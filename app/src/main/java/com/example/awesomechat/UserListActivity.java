@@ -140,7 +140,6 @@ public class UserListActivity extends AppCompatActivity {
 
         userLayoutManager = new LinearLayoutManager(this);
         userAdapter = new UserAdapter(userArrayList);
-
         usersRecyclerView.setLayoutManager(userLayoutManager);
         usersRecyclerView.setAdapter(userAdapter);
 

@@ -23,6 +23,9 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -45,13 +48,11 @@ import java.util.Locale;
 
 public class ChatActivity extends AppCompatActivity {
 
-    private ListView messageListView;
-    private AwesomeMessageAdapter adapter;
+
     private ProgressBar progressBar;
     private ImageButton sendImageButton;
     private Button sendMessageButton;
     private EditText messageEditText;
-    private TextView dataTextView;
     private androidx.appcompat.widget.Toolbar toolbar;
 
 
@@ -72,6 +73,10 @@ public class ChatActivity extends AppCompatActivity {
     private StorageReference chatImageStorageReferences;
 
 
+    private RecyclerView messageListRecyclerView;
+    private RecyclerView.LayoutManager messageLayoutManager;
+    private ArrayList<AwesomeMessage> messageArrayList;
+    private AwesomeMessageAdapter adapter;
 
     String datePattern = "MMMM d, hh:mm:ss";
     final SimpleDateFormat dateFormat = new SimpleDateFormat(datePattern, Locale.getDefault());
@@ -85,7 +90,7 @@ public class ChatActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        messageArrayList = new ArrayList<>();
 
         auth = FirebaseAuth.getInstance();
 
@@ -98,10 +103,10 @@ public class ChatActivity extends AppCompatActivity {
 
         setTitle(recepientUserName);
 
-
         database = FirebaseDatabase.getInstance();
         messagesDatabaseReference = database.getReference().child("messages");
         usersDatabaseReference = database.getReference().child("users");
+
 
         storage = FirebaseStorage.getInstance();
         chatImageStorageReferences = storage.getReference().child("chatImages");
@@ -111,14 +116,7 @@ public class ChatActivity extends AppCompatActivity {
         sendImageButton = findViewById(R.id.sendPhotoButton);
         sendMessageButton = findViewById(R.id.sendMassageButton);
         messageEditText = findViewById(R.id.editMassageText);
-        dataTextView = findViewById(R.id.dataTextView);
 
-
-        messageListView = findViewById(R.id.messageListView);
-        List<AwesomeMessage> awesomeMessages = new ArrayList<>();
-        adapter = new AwesomeMessageAdapter(this, R.layout.message_item,
-                awesomeMessages);
-        messageListView.setAdapter(adapter);
 
         progressBar.setVisibility(ProgressBar.INVISIBLE);
 
@@ -126,24 +124,20 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence s, int start,
                                           int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
-
                 if (s.toString().trim().length() > 0) {
                     sendMessageButton.setEnabled(true);
                 } else {
                     sendMessageButton.setEnabled(false);
                 }
-
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
 
@@ -160,9 +154,8 @@ public class ChatActivity extends AppCompatActivity {
                 message.setRecepient(recepientUserId);
                 message.setName(userName);
                 message.setMessageDate(dateFormat.format(new Date()));
-                message.setImageUrl(null);
+                //message.setImageUrl(null);
                 messagesDatabaseReference.push().setValue(message);
-
                 messageEditText.setText("");
             }
         });
@@ -170,12 +163,10 @@ public class ChatActivity extends AppCompatActivity {
         sendImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("image/*");
                 intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
                 startActivityForResult(Intent.createChooser(intent, "Choose an image"), RC_IMAGE_PICKER);
-
             }
         });
 
@@ -183,7 +174,6 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 User user = dataSnapshot.getValue(User.class);
-
                 if (user.getId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                     userName = user.getName();
                 }
@@ -217,22 +207,24 @@ public class ChatActivity extends AppCompatActivity {
         messagesChildEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                AwesomeMessage message =
-                        dataSnapshot.getValue(AwesomeMessage.class);
+                AwesomeMessage message = dataSnapshot.getValue(AwesomeMessage.class);
 
-                if (message == null) {
+                /*if (message == null) {
                     return;
-                }
-
-                if (message.getSender() != null && message.getSender().equals(auth.getCurrentUser().getUid()) &&
+                }*/
+                if (message.getSender().equals(auth.getCurrentUser().getUid()) &&
                         message.getRecepient().equals(recepientUserId)) {
                     message.setMine(true);
-                    adapter.add(message);
+                    messageArrayList.add(message);
+                    adapter.notifyDataSetChanged();
+                    //adapter.add(message);
 
-                } else if (message.getRecepient() != null && message.getRecepient().equals(auth.getCurrentUser().getUid()) &&
+                } else if (message.getRecepient().equals(auth.getCurrentUser().getUid()) &&
                         message.getSender().equals(recepientUserId)) {
                     message.setMine(false);
-                    adapter.add(message);
+                    messageArrayList.add(message);
+                    adapter.notifyDataSetChanged();
+                   // adapter.add(message);
 
                 }
             }
@@ -259,7 +251,27 @@ public class ChatActivity extends AppCompatActivity {
         };
 
         messagesDatabaseReference.addChildEventListener(messagesChildEventListener);
+
+        buildRecyclerView();
     }
+
+    private void buildRecyclerView() {
+        messageListRecyclerView = findViewById(R.id.massageListRecycierView);
+        messageListRecyclerView.setHasFixedSize(true);
+
+        messageListRecyclerView.addItemDecoration(new DividerItemDecoration
+
+                (messageListRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
+
+        messageLayoutManager = new LinearLayoutManager(this);
+        adapter = new AwesomeMessageAdapter(messageArrayList);
+        //messageListRecyclerView.setLayoutManager(messageLayoutManager);
+        messageListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        messageListRecyclerView.setAdapter(adapter);
+
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -312,17 +324,16 @@ public class ChatActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
                     if (task.isSuccessful()) {
-                        Uri downloadUri = task.getResult();
+                      //  Uri downloadUri = task.getResult();
                         AwesomeMessage message = new AwesomeMessage();
-                        message.setImageUrl(downloadUri.toString());
+                       // message.setImageUrl(downloadUri);
                         message.setName(userName);
                         message.setMessageDate(dateFormat.format(new Date()));
                         message.setSender(auth.getCurrentUser().getUid());
                         message.setRecepient(recepientUserId);
                         messagesDatabaseReference.push().setValue(message);
                     } else {
-
-                    }
+                        }
                 }
             });
         }
