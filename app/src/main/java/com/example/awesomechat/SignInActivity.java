@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -51,6 +52,10 @@ public class SignInActivity extends AppCompatActivity {
         textLoginSignUpTextView = findViewById(R.id.googleLoginSignUpTextView);
         buttonSignUp = findViewById(R.id.loginSignUpButton);
         confirmPasswordEditText = findViewById(R.id.repeatPasswordEditText);
+
+
+
+
 
 
         auth = FirebaseAuth.getInstance();
