@@ -1,6 +1,5 @@
 package com.example.awesomechat;
 
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
-
-
 import java.util.ArrayList;
 
 public class AwesomeMessageAdapter
@@ -22,10 +19,8 @@ public class AwesomeMessageAdapter
 
     private ArrayList<AwesomeMessage> awesomeMessages;
 
-
     public AwesomeMessageAdapter( ArrayList<AwesomeMessage> messages) {
         awesomeMessages = messages;
-
     }
 
     @Override
@@ -69,10 +64,8 @@ public class AwesomeMessageAdapter
         AwesomeMessage message = (AwesomeMessage) awesomeMessages.get(position);
 
         if (message.getSender().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-            // If the current user is the sender of the message
             return VIEW_TYPE_MESSAGE_SENT;
         } else {
-            // If some other user sent the message
             return VIEW_TYPE_MESSAGE_RECEIVED;
         }
     }

@@ -19,11 +19,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,7 +41,6 @@ import com.google.firebase.storage.UploadTask;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 public class ChatActivity extends AppCompatActivity {
@@ -82,6 +79,7 @@ public class ChatActivity extends AppCompatActivity {
     final SimpleDateFormat dateFormat = new SimpleDateFormat(datePattern, Locale.getDefault());
 
     @RequiresApi(api = Build.VERSION_CODES.N)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,7 +89,6 @@ public class ChatActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         messageArrayList = new ArrayList<>();
-
         auth = FirebaseAuth.getInstance();
 
         Intent intent = getIntent();
@@ -107,28 +104,32 @@ public class ChatActivity extends AppCompatActivity {
         messagesDatabaseReference = database.getReference().child("messages");
         usersDatabaseReference = database.getReference().child("users");
 
-
         storage = FirebaseStorage.getInstance();
         chatImageStorageReferences = storage.getReference().child("chatImages");
-
 
         progressBar = findViewById(R.id.progressBar);
         sendImageButton = findViewById(R.id.sendPhotoButton);
         sendMessageButton = findViewById(R.id.sendMassageButton);
         messageEditText = findViewById(R.id.editMassageText);
 
-
         progressBar.setVisibility(ProgressBar.INVISIBLE);
 
         messageEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
+            public void beforeTextChanged(
+                    CharSequence s,
+                    int start,
+                    int count,
+                    int after) {
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
+            public void onTextChanged(
+                    CharSequence s,
+                    int start,
+                    int before,
+                    int count
+            ) {
                 if (s.toString().trim().length() > 0) {
                     sendMessageButton.setEnabled(true);
                 } else {
@@ -142,19 +143,13 @@ public class ChatActivity extends AppCompatActivity {
         });
 
         messageEditText.setFilters(new InputFilter[]
-                {new InputFilter.LengthFilter(200)});
+                {new InputFilter.LengthFilter(200)}
+        );
 
         sendMessageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                AwesomeMessage message = new AwesomeMessage();
-                message.setText(messageEditText.getText().toString());
-                message.setSender(auth.getCurrentUser().getUid());
-                message.setRecepient(recepientUserId);
-                message.setName(userName);
-                message.setMessageDate(dateFormat.format(new Date()));
-                message.setImageUrl(null);
+                AwesomeMessage message = setMessage(messageEditText.getText().toString(), null);
                 messagesDatabaseReference.push().setValue(message);
                 messageEditText.setText("");
             }
@@ -177,29 +172,23 @@ public class ChatActivity extends AppCompatActivity {
                 if (user.getId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                     userName = user.getName();
                 }
-
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
             }
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
-
         };
 
         usersDatabaseReference.addChildEventListener(usersChildEventListener);
@@ -209,42 +198,39 @@ public class ChatActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 AwesomeMessage message = dataSnapshot.getValue(AwesomeMessage.class);
 
-//                if (message == null) {
-//                    return;
-//                }
-                if (message.getSender().equals(auth.getCurrentUser().getUid()) &&
-                        message.getRecepient().equals(recepientUserId)) {
-                    message.setMine(true);
-                    messageArrayList.add(message);
-                    adapter.notifyDataSetChanged();
-
-                } else if (message.getRecepient().equals(auth.getCurrentUser().getUid()) &&
-                        message.getSender().equals(recepientUserId)) {
-                    message.setMine(false);
-                    messageArrayList.add(message);
-                    adapter.notifyDataSetChanged();
+                if (message == null) {
+                    return;
 
                 }
+
+                if (message.getSender() != null &&
+                        message.getSender().equals(auth.getCurrentUser().getUid()) &&
+                        message.getRecepient().equals(recepientUserId)) {
+                    messageArrayList.add(message);
+                    adapter.notifyDataSetChanged();
+
+                } else if (message.getRecepient() != null &&
+                        message.getRecepient().equals(auth.getCurrentUser().getUid()) &&
+                        message.getSender().equals(recepientUserId)) {
+                    messageArrayList.add(message);
+                    adapter.notifyDataSetChanged();
+                }
+
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
             }
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         };
 
@@ -261,10 +247,7 @@ public class ChatActivity extends AppCompatActivity {
         adapter = new AwesomeMessageAdapter(messageArrayList);
         messageListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         messageListRecyclerView.setAdapter(adapter);
-
     }
-
-
 
 
     @Override
@@ -276,14 +259,13 @@ public class ChatActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         switch (item.getItemId()) {
             case R.id.sign_out:
                 FirebaseAuth.getInstance().signOut();
-                startActivity( new Intent(ChatActivity.this, SignInActivity.class));
+                startActivity(new Intent(ChatActivity.this, SignInActivity.class));
                 finishAffinity();
                 return true;
 
@@ -318,20 +300,30 @@ public class ChatActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
                     if (task.isSuccessful()) {
-                       Uri downloadUri = task.getResult();
-                        AwesomeMessage message = new AwesomeMessage();
-                        message.setImageUrl(downloadUri.toString());
-                        message.setName(userName);
-                        message.setMessageDate(dateFormat.format(new Date()));
-                        message.setSender(auth.getCurrentUser().getUid());
-                        message.setRecepient(recepientUserId);
+                        Uri downloadUri = task.getResult();
+                        AwesomeMessage message = setMessage(null, downloadUri.toString());
                         messagesDatabaseReference.push().setValue(message);
                     } else {
-                        }
+                    }
                 }
             });
         }
     }
 
+    public AwesomeMessage setMessage (String messageText, String messageImg) {
+        AwesomeMessage message = new AwesomeMessage();
+        if (messageText != null) {
+            message.setText(messageEditText.getText().toString());
+            message.setImageUrl(null);
+        } else if (messageImg != null) {
+            message.setImageUrl(messageImg);
+            message.setText(null);
+        }
+        message.setSender(auth.getCurrentUser().getUid());
+        message.setRecepient(recepientUserId);
+        message.setName(userName);
+        message.setMessageDate(dateFormat.format(new Date()));
 
+        return message;
+    }
 }

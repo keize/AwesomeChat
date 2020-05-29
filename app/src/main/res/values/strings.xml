@@ -1,5 +1,15 @@
 <resources>
     <string name="app_name">Awesome Chat!</string>
     <string name="chats">Chats</string>
+    <string name="password_dont_match">Password don\'t match</string>
+    <string name="password_must_be_leaast_7_charecters">Password must be leaast 7 charecters</string>
+    <string name="please_input_email">Please, input email</string>
+    <string name="authentication_failed">Authentication failed</string>
+
+    <string name="log_in">Log in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="or_sign_up">Or, sign up</string>
+    <string name="or_log_in">Or, log in</string>
+
 
 </resources>

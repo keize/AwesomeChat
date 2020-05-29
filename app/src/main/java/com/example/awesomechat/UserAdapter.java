@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,7 +17,6 @@ public class UserAdapter
     private ArrayList<User> users;
     private OnUserClickListener listener;
 
-
     public interface OnUserClickListener {
         void onUserClick(int position);
     }
@@ -29,11 +27,9 @@ public class UserAdapter
 
     public UserAdapter(ArrayList<User> users) {
         this.users = users;
-
     }
 
     @Override
-
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.user_item, viewGroup, false);

@@ -9,7 +9,12 @@ public class User {
     public User() {
     }
 
-    public User(String name, String email, String id, int getAvatarMockUpResource) {
+    public User(
+            String name,
+            String email,
+            String id,
+            int getAvatarMockUpResource
+    ) {
         this.name = name;
         this.email = email;
         this.id = id;

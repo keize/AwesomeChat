@@ -1,6 +1,5 @@
 package com.example.awesomechat;
 
-import android.net.Uri;
 
 public class AwesomeMessage {
 
@@ -9,29 +8,26 @@ public class AwesomeMessage {
     private String imageUrl;
     private String sender;
     private String recepient;
-    private boolean isMine;
     private String messageDate;
 
 
     public AwesomeMessage() {
     }
 
-    public AwesomeMessage(String text, String name, String sender, String recepient, boolean isMine, String imageUrl) {
+    public AwesomeMessage(
+            String text,
+            String name,
+            String sender,
+            String recepient,
+            String imageUrl
+    ) {
         this.text = text;
         this.name = name;
         this.imageUrl = imageUrl;
         this.sender = sender;
         this.recepient = recepient;
-        this.isMine = isMine;
     }
 
-    public boolean isMine() {
-        return isMine;
-    }
-
-    public void setMine(boolean mine) {
-        isMine = mine;
-    }
 
     public String getSender() {
         return sender;
