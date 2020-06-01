@@ -25,6 +25,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.awesomechat.Model.AwesomeMessage;
+import com.example.awesomechat.Model.User;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -45,13 +47,11 @@ import java.util.Locale;
 
 public class ChatActivity extends AppCompatActivity {
 
-
     private ProgressBar progressBar;
     private ImageButton sendImageButton;
     private Button sendMessageButton;
     private EditText messageEditText;
     private androidx.appcompat.widget.Toolbar toolbar;
-
 
     private static final int RC_IMAGE_PICKER = 123;
     private String userName;
@@ -69,14 +69,21 @@ public class ChatActivity extends AppCompatActivity {
     private FirebaseStorage storage;
     private StorageReference chatImageStorageReferences;
 
-
     private RecyclerView messageListRecyclerView;
     private RecyclerView.LayoutManager messageLayoutManager;
     private ArrayList<AwesomeMessage> messageArrayList;
     private AwesomeMessageAdapter adapter;
 
-    String datePattern = "MMMM d, hh:mm:ss";
-    final SimpleDateFormat dateFormat = new SimpleDateFormat(datePattern, Locale.getDefault());
+    public static final String DATE_PATTERN = "MMMM d, hh:mm:ss";
+    private static final String DB_BRANCH_NAME_USERS = "users";
+    private static final String DB_BRANCH_NAME_MESSAGES = "messages";
+    private static final String DB_BRANCH_NAME_IMAGES = "chatImages";
+
+    public static final String INTENT_USER_NAME = "userName";
+    public static final String INTENT_USER_RECEPIENT_ID = "recepientUserId";
+    public static final String INTENT_USER_RECEPIENT_NAME = "recepientUserName";
+
+    final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_PATTERN, Locale.getDefault());
 
     @RequiresApi(api = Build.VERSION_CODES.N)
 
@@ -93,19 +100,19 @@ public class ChatActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            userName = intent.getStringExtra("userName");
-            recepientUserId = intent.getStringExtra("recepientUserId");
-            recepientUserName = intent.getStringExtra("recepientUserName");
+            userName = intent.getStringExtra(INTENT_USER_NAME);
+            recepientUserId = intent.getStringExtra(INTENT_USER_RECEPIENT_ID);
+            recepientUserName = intent.getStringExtra(INTENT_USER_RECEPIENT_NAME);
         }
 
         setTitle(recepientUserName);
 
         database = FirebaseDatabase.getInstance();
-        messagesDatabaseReference = database.getReference().child("messages");
-        usersDatabaseReference = database.getReference().child("users");
+        messagesDatabaseReference = database.getReference().child(DB_BRANCH_NAME_MESSAGES);
+        usersDatabaseReference = database.getReference().child(DB_BRANCH_NAME_USERS);
 
         storage = FirebaseStorage.getInstance();
-        chatImageStorageReferences = storage.getReference().child("chatImages");
+        chatImageStorageReferences = storage.getReference().child(DB_BRANCH_NAME_IMAGES);
 
         progressBar = findViewById(R.id.progressBar);
         sendImageButton = findViewById(R.id.sendPhotoButton);
@@ -200,7 +207,6 @@ public class ChatActivity extends AppCompatActivity {
 
                 if (message == null) {
                     return;
-
                 }
 
                 if (message.getSender() != null &&
@@ -215,7 +221,6 @@ public class ChatActivity extends AppCompatActivity {
                     messageArrayList.add(message);
                     adapter.notifyDataSetChanged();
                 }
-
             }
 
             @Override
@@ -229,13 +234,13 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         };
 
         messagesDatabaseReference.addChildEventListener(messagesChildEventListener);
-
         buildRecyclerView();
     }
 
@@ -245,7 +250,7 @@ public class ChatActivity extends AppCompatActivity {
 
         messageLayoutManager = new LinearLayoutManager(this);
         adapter = new AwesomeMessageAdapter(messageArrayList);
-        messageListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        messageListRecyclerView.setLayoutManager(messageLayoutManager);
         messageListRecyclerView.setAdapter(adapter);
     }
 
@@ -268,10 +273,8 @@ public class ChatActivity extends AppCompatActivity {
                 startActivity(new Intent(ChatActivity.this, SignInActivity.class));
                 finishAffinity();
                 return true;
-
             default:
                 return super.onOptionsItemSelected(item);
-
         }
     }
 
@@ -285,8 +288,6 @@ public class ChatActivity extends AppCompatActivity {
                     .child(selectImageUrl.getLastPathSegment());
 
             UploadTask uploadTask = imageReference.putFile(selectImageUrl);
-
-            uploadTask = imageReference.putFile(selectImageUrl);
 
             Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
@@ -310,7 +311,7 @@ public class ChatActivity extends AppCompatActivity {
         }
     }
 
-    public AwesomeMessage setMessage (String messageText, String messageImg) {
+    public AwesomeMessage setMessage(String messageText, String messageImg) {
         AwesomeMessage message = new AwesomeMessage();
         if (messageText != null) {
             message.setText(messageEditText.getText().toString());
@@ -323,7 +324,6 @@ public class ChatActivity extends AppCompatActivity {
         message.setRecepient(recepientUserId);
         message.setName(userName);
         message.setMessageDate(dateFormat.format(new Date()));
-
         return message;
     }
 }

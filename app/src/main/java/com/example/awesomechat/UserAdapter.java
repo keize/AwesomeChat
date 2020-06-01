@@ -6,8 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.awesomechat.Model.User;
 
 import java.util.ArrayList;
 
@@ -40,8 +43,7 @@ public class UserAdapter
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder userViewHolder, int i) {
         User currentUser = users.get(i);
-        userViewHolder.avatarImageView.setImageResource(currentUser.getGetAvatarMockUpResource());
-        userViewHolder.userNameTextView.setText(currentUser.getName());
+        userViewHolder.bind(currentUser);
     }
 
     @Override
@@ -70,6 +72,11 @@ public class UserAdapter
                     }
                 }
             });
+        }
+
+        public void bind(User currentUser) {
+            avatarImageView.setImageResource(currentUser.getGetAvatarMockUpResource());
+            userNameTextView.setText(currentUser.getName());
         }
     }
 }
