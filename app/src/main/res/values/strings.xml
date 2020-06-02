@@ -11,5 +11,34 @@
     <string name="or_sign_up">Or, sign up</string>
     <string name="or_log_in">Or, log in</string>
 
+    <string name="date">Date</string>
+    <string name="name">Name</string>
+    <string name="text">Text</string>
+
+    <string name="input_email">Your Email</string>
+    <string name="input_password">Your Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="input_name">Your Name</string>
+
+    <string name="button_login">Log in</string>
+    <string name="button_signin">Tap To Sign in</string>
+    <string name="button_send_message">Send</string>
+
+
+    <string name="servise_userName">userName</string>
+    <string name="servise_recepientUserId">recepientUserId</string>
+    <string name="servise_recepientUserName">recepientUserName</string>
+
+    <string name="db_child_messages">messages</string>
+    <string name="db_child_users">users</string>
+    <string name="db_child_chatImages">chatImages</string>
+
+    <string name="choose_an_image">Choose an image</string>
+ )
+
+
+
+
+
 
 </resources>

@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="@drawable/gradient"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    android:orientation="vertical"
     tools:context=".SignInActivity">
 
 
-    
     <ImageView
         android:layout_width="300dp"
         android:layout_height="150dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:src="@drawable/sad_sun"/>
+        android:src="@drawable/sad_sun" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,75 +22,75 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/emailEditText"
-                android:textColor="@color/lightgrey"
-                android:hint="Your Email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="@string/input_email"
                 android:inputType="textEmailAddress"
-                android:layout_marginTop="10dp"/>
+                android:textColor="@color/lightgrey"
+                android:autofillHints="" />
 
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/lightgrey"
                 android:id="@+id/passwordEditText"
-                android:hint="Your Password"
-                android:inputType="textPassword"
-                android:layout_marginTop="10dp"/>
-
-            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="@string/input_password"
+                android:inputType="textPassword"
+                android:textColor="@color/lightgrey"
+                android:autofillHints="" />
+
+            <EditText
                 android:id="@+id/repeatPasswordEditText"
-                android:visibility="gone"
-                android:hint="Confirm Password"
-                android:textColor="@color/lightgrey"
-                android:inputType="textPassword"
-                android:layout_marginTop="10dp"/>
-
-            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/nameEditText"
-                android:visibility="gone"
-                android:hint="Your Name"
+                android:layout_marginTop="10dp"
+                android:hint="@string/confirm_password"
+                android:inputType="textPassword"
                 android:textColor="@color/lightgrey"
+                android:visibility="gone"
+                android:autofillHints="" />
+
+            <EditText
+                android:id="@+id/nameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="@string/input_name"
                 android:inputType="textPersonName"
-                android:layout_marginTop="10dp"/>
+                android:textColor="@color/lightgrey"
+                android:visibility="gone"
+                android:autofillHints="" />
 
         </LinearLayout>
-
-
 
     </ScrollView>
 
     <Button
+        android:id="@+id/loginSignUpButton"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="Log in"
-        android:background="@drawable/rectangle_for_button"
-        android:layout_marginTop="10dp"
         android:layout_gravity="center"
-        android:id="@+id/loginSignUpButton"/>
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rectangle_for_button"
+        android:text="@string/button_login" />
 
     <TextView
         android:id="@+id/googleLoginSignUpTextView"
-        android:text="Tap To Sign in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:textSize="16sp"
+        android:layout_marginTop="10dp"
         android:clickable="true"
         android:onClick="toggleLoginMode"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-
-
+        android:text="@string/button_signin"
+        android:textSize="16sp"
+        android:focusable="true" />
 
 </LinearLayout>
