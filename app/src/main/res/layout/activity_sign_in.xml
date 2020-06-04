@@ -7,7 +7,6 @@
     android:orientation="vertical"
     tools:context=".SignInActivity">
 
-
     <ImageView
         android:layout_width="300dp"
         android:layout_height="150dp"
@@ -30,10 +29,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:autofillHints=""
                 android:hint="@string/input_email"
                 android:inputType="textEmailAddress"
-                android:textColor="@color/lightgrey"
-                android:autofillHints="" />
+                android:textColor="@color/lightgrey" />
 
 
             <EditText
@@ -41,32 +40,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:autofillHints=""
                 android:hint="@string/input_password"
                 android:inputType="textPassword"
-                android:textColor="@color/lightgrey"
-                android:autofillHints="" />
+                android:textColor="@color/lightgrey" />
 
             <EditText
                 android:id="@+id/repeatPasswordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:autofillHints=""
                 android:hint="@string/confirm_password"
                 android:inputType="textPassword"
                 android:textColor="@color/lightgrey"
-                android:visibility="gone"
-                android:autofillHints="" />
+                android:visibility="gone" />
 
             <EditText
                 android:id="@+id/nameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:autofillHints=""
                 android:hint="@string/input_name"
                 android:inputType="textPersonName"
                 android:textColor="@color/lightgrey"
-                android:visibility="gone"
-                android:autofillHints="" />
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -79,7 +78,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:background="@drawable/rectangle_for_button"
-        android:text="@string/button_login" />
+        android:text="@string/log_in" />
 
     <TextView
         android:id="@+id/googleLoginSignUpTextView"
@@ -88,9 +87,9 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:clickable="true"
+        android:focusable="true"
         android:onClick="toggleLoginMode"
         android:text="@string/button_signin"
-        android:textSize="16sp"
-        android:focusable="true" />
+        android:textSize="16sp" />
 
 </LinearLayout>
