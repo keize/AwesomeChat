@@ -2,6 +2,7 @@ package com.example.awesomechat;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.awesomechat.Model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -21,6 +24,9 @@ import com.google.firebase.database.FirebaseDatabase;
 public class SignInActivity extends AppCompatActivity {
 
     private static final String TAG = "SignInActivity";
+    private static final String DB_NAME_USERS = "users";
+    private static final String LOG_MESSAGE_SIGN_IN_SUCCESS = "signInWithEmail:success";
+    private static final String LOG_MESSAGE_SIGN_IN_FAILURE = "signInWithEmail:failure";
     private boolean loginModeActive;
 
     private FirebaseAuth auth;
@@ -40,7 +46,7 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
 
         database = FirebaseDatabase.getInstance();
-        usersDatabaseReference = database.getReference().child("users");
+        usersDatabaseReference = database.getReference().child(DB_NAME_USERS);
 
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
@@ -109,7 +115,6 @@ public class SignInActivity extends AppCompatActivity {
                             }
                         });
             }
-
         }
     }
 
@@ -119,13 +124,10 @@ public class SignInActivity extends AppCompatActivity {
         user.setId(firebaseUser.getUid());
         user.setEmail(firebaseUser.getEmail());
         user.setName(nameEditText.getText().toString().trim());
-
         usersDatabaseReference.push().setValue(user);
-
     }
 
-    public void toggleLoginMode (View view){
-
+    public void toggleLoginMode(View view) {
         if (loginModeActive) {
             loginModeActive = false;
             buttonSignUp.setText(R.string.log_in);
@@ -139,19 +141,18 @@ public class SignInActivity extends AppCompatActivity {
             nameEditText.setVisibility(View.VISIBLE);
             confirmPasswordEditText.setVisibility(View.VISIBLE);
         }
+    }
 
-        }
-
-        public void successLoginOrSignUp(Task<AuthResult> task) {
-            if (task.isSuccessful()) {
-                Log.d(TAG, "signInWithEmail:success");
-                Intent intent = new Intent(SignInActivity.this, UserListActivity.class);
-                intent.putExtra("userName", nameEditText.getText().toString().trim() );
-                startActivity(intent);
-            } else {
-                Log.w(TAG, "signInWithEmail:failure", task.getException());
-                Toast.makeText(SignInActivity.this, R.string.authentication_failed,
-                        Toast.LENGTH_SHORT).show();
-            }
+    public void successLoginOrSignUp(Task<AuthResult> task) {
+        if (task.isSuccessful()) {
+            Log.d(TAG, LOG_MESSAGE_SIGN_IN_SUCCESS);
+            Intent intent = new Intent(SignInActivity.this, UserListActivity.class);
+            intent.putExtra(ChatActivity.INTENT_USER_NAME, nameEditText.getText().toString().trim());
+            startActivity(intent);
+        } else {
+            Log.w(TAG, LOG_MESSAGE_SIGN_IN_FAILURE, task.getException());
+            Toast.makeText(SignInActivity.this, R.string.authentication_failed,
+                    Toast.LENGTH_SHORT).show();
         }
     }
+}

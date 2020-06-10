@@ -1,8 +1,6 @@
-package com.example.awesomechat;
-
+package com.example.awesomechat.Model;
 
 public class AwesomeMessage {
-
     private String text;
     private String name;
     private String imageUrl;
@@ -10,24 +8,8 @@ public class AwesomeMessage {
     private String recepient;
     private String messageDate;
 
-
     public AwesomeMessage() {
     }
-
-    public AwesomeMessage(
-            String text,
-            String name,
-            String sender,
-            String recepient,
-            String imageUrl
-    ) {
-        this.text = text;
-        this.name = name;
-        this.imageUrl = imageUrl;
-        this.sender = sender;
-        this.recepient = recepient;
-    }
-
 
     public String getSender() {
         return sender;

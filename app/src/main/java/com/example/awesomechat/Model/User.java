@@ -1,4 +1,4 @@
-package com.example.awesomechat;
+package com.example.awesomechat.Model;
 
 public class User {
     private String name;
@@ -7,18 +7,6 @@ public class User {
     private int getAvatarMockUpResource;
 
     public User() {
-    }
-
-    public User(
-            String name,
-            String email,
-            String id,
-            int getAvatarMockUpResource
-    ) {
-        this.name = name;
-        this.email = email;
-        this.id = id;
-        this.getAvatarMockUpResource = getAvatarMockUpResource;
     }
 
     public String getName() {

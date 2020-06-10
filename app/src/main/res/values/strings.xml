@@ -1,15 +1,52 @@
 <resources>
+    <!-- App name -->
     <string name="app_name">Awesome Chat!</string>
-    <string name="chats">Chats</string>
+
+    <!-- Service messages (toasts) -->
     <string name="password_dont_match">Password don\'t match</string>
     <string name="password_must_be_leaast_7_charecters">Password must be leaast 7 charecters</string>
     <string name="please_input_email">Please, input email</string>
     <string name="authentication_failed">Authentication failed</string>
 
+    <!-- Service hints on SignUp/LogIN -->
+    <string name="input_email">Your Email</string>
+    <string name="input_password">Your Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="input_name">Your Name</string>
+
+    <!-- Text button on SignUp/LogIN -->
     <string name="log_in">Log in</string>
     <string name="sign_up">Sign up</string>
     <string name="or_sign_up">Or, sign up</string>
     <string name="or_log_in">Or, log in</string>
+    <string name="button_signin">Tap to Sign up</string>
+
+    <!-- Message items -->
+    <string name="date">Date</string>
+    <string name="name">Name</string>
+    <string name="text">Text</string>
+
+    <!-- Toolbar title on UserListActivity -->
+    <string name="chats">Chats</string>
+
+    <!-- Toolbar menu items -->
+    <string name="sign_out">Sign Out</string>
+
+    <!-- Intents toast items -->
+    <string name="choose_an_image">Choose an image</string>
+
+    <!-- Service usernames -->
+    <string name="servise_userName">userName</string>
+    <string name="servise_recepientUserId">recepientUserId</string>
+    <string name="servise_recepientUserName">recepientUserName</string>
+
+    <!-- DB name branches -->
+    <string name="db_child_messages">messages</string>
+    <string name="db_child_users">users</string>
+    <string name="db_child_chatImages">chatImages</string>
+
+    <!-- Button name on Chat Activity -->
+    <string name="button_send_message">Send</string>
 
 
 </resources>

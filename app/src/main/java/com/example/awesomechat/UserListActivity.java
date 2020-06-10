@@ -7,17 +7,21 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import com.example.awesomechat.Model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class UserListActivity extends AppCompatActivity {
@@ -128,7 +132,6 @@ public class UserListActivity extends AppCompatActivity {
         userAdapter = new UserAdapter(userArrayList);
         usersRecyclerView.setLayoutManager(userLayoutManager);
         usersRecyclerView.setAdapter(userAdapter);
-
         userAdapter.setOnUserClickListener(new UserAdapter.OnUserClickListener() {
             @Override
             public void onUserClick(int position) {
@@ -139,10 +142,11 @@ public class UserListActivity extends AppCompatActivity {
 
     private void goToChat(int position) {
         Intent intent = new Intent(UserListActivity.this, ChatActivity.class);
-        intent.putExtra("recepientUserId", userArrayList.get(position).getId());
-        intent.putExtra("recepientUserName", userArrayList.get(position).getName());
-        intent.putExtra("userName", userName);
+        intent.putExtra(ChatActivity.INTENT_USER_RECEPIENT_ID, userArrayList.get(position).getId());
+        intent.putExtra(ChatActivity.INTENT_USER_RECEPIENT_NAME, userArrayList.get(position).getName());
+        intent.putExtra(ChatActivity.INTENT_USER_NAME, userName);
         startActivity(intent);
+
     }
 
 }

@@ -1,41 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".UserListActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar123"
+        style="@style/Toolbar"
         app:title="@string/chats"
-        app:titleTextColor="@color/lightgrey"
-        android:layout_width="match_parent"
-        android:background="@color/colorPrimary"
-        app:popupTheme="@style/Theme.AppCompat.Light.NoActionBar"
-        app:theme="@style/Theme.AppCompat.NoActionBar"
-        android:layout_height="wrap_content">
+        app:titleTextColor="@color/lightgrey">
+
     </androidx.appcompat.widget.Toolbar>
 
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/toolbar123"
-    tools:context=".UserListActivity">
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/userListRecycierView"
-        android:padding="16dp"
-        android:scrollbars="vertical"
-        tools:listitem="@layout/user_item"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar123"
+        android:orientation="vertical"
+        tools:context=".UserListActivity">
 
-</LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/userListRecycierView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            android:scrollbars="vertical"
+            tools:listitem="@layout/user_item" />
+
+    </LinearLayout>
 
 </RelativeLayout>

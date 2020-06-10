@@ -1,70 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="16dp"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
+    android:layout_height="wrap_content"
+    android:padding="16dp">
 
     <LinearLayout
         android:id="@+id/shadow"
-        android:layout_margin="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:background="@drawable/shape_gradient_my_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:background="@drawable/shape_gradient_my_message">
 
+        <LinearLayout
+            android:id="@+id/message"
+            style="@style/Layout_messages"
+            android:background="@drawable/shape_my_message"
+            android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/message"
-        android:orientation="vertical"
-        android:layout_margin="3dp"
-        android:background="@drawable/shape_my_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/messegeTextView"
+                style="@style/Text_messages"
+                android:textColor="#FFFFFF"
+                tools:text="@string/text" />
 
+            <ImageView
+                android:id="@+id/photoImageView"
+                style="@style/Image_messages" />
 
-
-        <TextView
-            android:id="@+id/messegeTextView"
-            android:padding="5dp"
-            android:text="Text"
-            android:textColor="#FFFFFF"
-            android:textStyle="normal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        </TextView>
-
-        <ImageView
-            android:id="@+id/photoImageView"
-            android:maxWidth="200dp"
-            android:maxHeight="200dp"
-            android:adjustViewBounds="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </ImageView>
-
-    </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
 
     <TextView
         android:id="@+id/dataTextView"
-        android:textColor="@color/darkblue"
-        android:padding="5dp"
-        android:text="Date"
-        android:layout_below="@+id/shadow"
-        android:textStyle="normal"
+        style="@style/Date_messages"
         android:layout_alignParentEnd="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </TextView>
-
-
-
-
-
+        tools:text="@string/date" />
 
 </RelativeLayout>

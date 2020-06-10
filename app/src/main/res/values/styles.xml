@@ -10,10 +10,48 @@
 
     <style name="Toolbar">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/lightgrey</item>
         <item name="theme">@style/AppTheme</item>
         <item name="android:background">@color/colorPrimary</item>
     </style>
+
+    <!-- Style for image messages "my" and "your" -->
+    <style name="Image_messages">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:maxWidth">200dp</item>
+        <item name="android:maxHeight">200dp</item>
+    </style>
+
+    <!-- Style for image messages "my" and "your" -->
+    <style name="Text_messages">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <!-- Style for date messages "my" and "your" -->
+    <style name="Date_messages">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_below">@+id/shadow</item>
+        <item name="android:textColor">@color/darkblue</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <!-- Style for linear layout messages "my" and "your" -->
+    <style name="Layout_messages">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:layout_below">@+id/shadow</item>
+    </style>
+
 
 </resources>

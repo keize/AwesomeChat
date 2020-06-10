@@ -5,10 +5,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
+import com.example.awesomechat.Model.AwesomeMessage;
 import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 
 public class AwesomeMessageAdapter
@@ -19,7 +23,7 @@ public class AwesomeMessageAdapter
 
     private ArrayList<AwesomeMessage> awesomeMessages;
 
-    public AwesomeMessageAdapter( ArrayList<AwesomeMessage> messages) {
+    public AwesomeMessageAdapter(ArrayList<AwesomeMessage> messages) {
         awesomeMessages = messages;
     }
 
@@ -37,20 +41,19 @@ public class AwesomeMessageAdapter
                     .inflate(R.layout.your_messege_item, parent, false);
             return new AwesomeMessageViewHolder(view);
         }
-
         return null;
     }
 
     @Override
     public void onBindViewHolder(@NonNull AwesomeMessageAdapter.AwesomeMessageViewHolder holder, int position) {
-        AwesomeMessage message = (AwesomeMessage) awesomeMessages.get(position);
+        AwesomeMessage message = awesomeMessages.get(position);
 
         switch (holder.getItemViewType()) {
             case VIEW_TYPE_MESSAGE_SENT:
-                ((AwesomeMessageViewHolder) holder).bind(message);
+                holder.bind(message);
                 break;
             case VIEW_TYPE_MESSAGE_RECEIVED:
-                ((AwesomeMessageViewHolder) holder).bind(message);
+                holder.bind(message);
         }
     }
 
@@ -61,7 +64,7 @@ public class AwesomeMessageAdapter
 
     @Override
     public int getItemViewType(int position) {
-        AwesomeMessage message = (AwesomeMessage) awesomeMessages.get(position);
+        AwesomeMessage message = awesomeMessages.get(position);
 
         if (message.getSender().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
             return VIEW_TYPE_MESSAGE_SENT;
@@ -81,6 +84,7 @@ public class AwesomeMessageAdapter
             textTextView = itemView.findViewById(R.id.messegeTextView);
             dataTextView = itemView.findViewById(R.id.dataTextView);
         }
+
         void bind(AwesomeMessage message) {
             textTextView.setText(message.getText());
             dataTextView.setText(message.getMessageDate());
