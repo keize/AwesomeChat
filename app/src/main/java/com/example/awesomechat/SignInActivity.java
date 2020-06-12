@@ -119,7 +119,6 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void createUser(FirebaseUser firebaseUser) {
-
         User user = new User();
         user.setId(firebaseUser.getUid());
         user.setEmail(firebaseUser.getEmail());
@@ -128,19 +127,11 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void toggleLoginMode(View view) {
-        if (loginModeActive) {
-            loginModeActive = false;
-            buttonSignUp.setText(R.string.log_in);
-            confirmPasswordEditText.setVisibility(View.GONE);
-            nameEditText.setVisibility(View.GONE);
-            textLoginSignUpTextView.setText(R.string.or_sign_up);
-        } else {
-            loginModeActive = true;
-            buttonSignUp.setText(R.string.sign_up);
-            textLoginSignUpTextView.setText(R.string.or_log_in);
-            nameEditText.setVisibility(View.VISIBLE);
-            confirmPasswordEditText.setVisibility(View.VISIBLE);
-        }
+        loginModeActive = !loginModeActive;
+        buttonSignUp.setText(loginModeActive ? R.string.log_in : R.string.sign_up);
+        confirmPasswordEditText.setVisibility(loginModeActive ? View.GONE : View.VISIBLE);
+        nameEditText.setVisibility(loginModeActive ? View.GONE : View.VISIBLE);
+        textLoginSignUpTextView.setText(loginModeActive ? R.string.or_sign_up : R.string.or_log_in);
     }
 
     public void successLoginOrSignUp(Task<AuthResult> task) {
