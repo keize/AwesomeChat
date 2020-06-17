@@ -21,8 +21,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:adjustViewBounds">true</item>
-        <item name="android:maxWidth">200dp</item>
-        <item name="android:maxHeight">200dp</item>
+
     </style>
 
     <!-- Style for image messages "my" and "your" -->
@@ -47,8 +46,8 @@
 
     <!-- Style for linear layout messages "my" and "your" -->
     <style name="Layout_messages">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:layout_margin">5dp</item>
         <item name="android:layout_below">@+id/shadow</item>
     </style>

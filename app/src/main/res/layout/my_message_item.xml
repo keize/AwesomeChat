@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:id="@+id/layout_mymessage"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:layout_marginEnd="16dp">
+
 
     <LinearLayout
         android:id="@+id/shadow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:background="@drawable/shape_gradient_my_message">
+        android:layout_marginTop="16dp"
+        android:background="@drawable/shape_gradient_my_message"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/message"
@@ -36,7 +41,10 @@
     <TextView
         android:id="@+id/dataTextView"
         style="@style/Date_messages"
-        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shadow"
         tools:text="@string/date" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

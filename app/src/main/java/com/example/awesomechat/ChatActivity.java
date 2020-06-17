@@ -116,12 +116,9 @@ public class ChatActivity extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         chatImageStorageReferences = storage.getReference().child(DB_BRANCH_NAME_IMAGES);
 
-        progressBar = findViewById(R.id.progressBar);
         sendImageButton = findViewById(R.id.sendPhotoButton);
         sendMessageButton = findViewById(R.id.sendMassageButton);
         messageEditText = findViewById(R.id.editMassageText);
-
-        progressBar.setVisibility(ProgressBar.INVISIBLE);
 
         messageEditText.addTextChangedListener(new TextWatcher() {
             @Override

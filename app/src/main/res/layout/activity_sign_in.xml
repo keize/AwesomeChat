@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,21 +9,30 @@
     tools:context=".SignInActivity">
 
     <ImageView
+        android:id="@+id/logoImage"
         android:layout_width="300dp"
         android:layout_height="150dp"
-        android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:src="@drawable/sad_sun" />
+        android:src="@drawable/sad_sun"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoImage">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <EditText
                 android:id="@+id/emailEditText"
@@ -75,10 +85,12 @@
         android:id="@+id/loginSignUpButton"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:background="@drawable/rectangle_for_button"
-        android:text="@string/log_in" />
+        android:text="@string/log_in"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
 
     <TextView
         android:id="@+id/googleLoginSignUpTextView"
@@ -90,6 +102,9 @@
         android:focusable="true"
         android:onClick="toggleLoginMode"
         android:text="@string/button_signin"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loginSignUpButton" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

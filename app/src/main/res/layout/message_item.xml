@@ -1,27 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/messageItemLayout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:maxWidth="200dp"
-    android:maxHeight="200dp"
-    android:orientation="vertical">
+    android:maxHeight="200dp">
 
     <ImageView
         android:id="@+id/photoImageView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/messegeTextView"
         style="@style/Text_messages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/text" />
 
     <TextView
         android:id="@+id/dataTextView"
         style="@style/Date_messages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
         tools:text="@string/date">
 
     </TextView>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

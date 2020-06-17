@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,6 +11,8 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar123"
         style="@style/Toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:title="@string/chats"
         app:titleTextColor="@color/lightgrey">
 
@@ -21,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar123"
         android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/toolbar123"
         tools:context=".UserListActivity">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -33,4 +36,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
