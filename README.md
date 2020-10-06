@@ -8,8 +8,8 @@ A simple messenger with the ability to exchange text and image messages.
 
 
 <div align="justify">
-    <img src="https://github.com/keize/AwesomeChat/blob/master/screenshots/Screenshot_1602023406.png" width="300px"</img>
-    <img src="https://github.com/keize/AwesomeChat/blob/master/screenshots/Screenshot_1602023447.png" width="300px"</img> 
-    <img src="https://github.com/keize/AwesomeChat/blob/master/screenshots/Screenshot_1602023554.png" width="300px"</img> 
+    <img src="https://github.com/keize/AwesomeChat/blob/master/screenshots/Screenshot_1602023406.png" width="270px"</img>
+    <img src="https://github.com/keize/AwesomeChat/blob/master/screenshots/Screenshot_1602023447.png" width="270px"</img> 
+    <img src="https://github.com/keize/AwesomeChat/blob/master/screenshots/Screenshot_1602023554.png" width="270px"</img> 
 
 </div>
